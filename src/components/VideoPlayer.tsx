@@ -51,7 +51,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     if (!channel) return;
-    const preferred = channel.preferredEngine || (channel.youtubeId || channel.youtubeLiveUrl ? 'youtube' : 'hls');
+    const hasHlsStream = Boolean(channel.streamUrl?.trim());
+    const hasYouTubeStream = Boolean(channel.youtubeId || channel.youtubeLiveUrl);
+    const preferred = hasHlsStream ? 'hls' : hasYouTubeStream ? 'youtube' : 'hls';
     setActiveEngine(preferred);
     setHasError(false);
     setErrorMessage('');
