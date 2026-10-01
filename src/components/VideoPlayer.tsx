@@ -47,7 +47,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isUsingCorsProxy, setIsUsingCorsProxy] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const controlsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!channel) return;

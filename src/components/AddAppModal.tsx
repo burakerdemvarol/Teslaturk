@@ -9,9 +9,10 @@ interface AddAppModalProps {
 }
 
 export const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAddApp }) => {
+  type AppFormCategory = Exclude<AppCategory, 'all'>;
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
-  const [category, setCategory] = useState<AppCategory>('streaming');
+  const [category, setCategory] = useState<AppFormCategory>('streaming');
   const [description, setDescription] = useState('');
 
   if (!isOpen) return null;
@@ -97,7 +98,7 @@ export const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd
             </label>
             <select
               value={category}
-              onChange={(e) => setCategory(e.target.value as AppCategory)}
+              onChange={(e) => setCategory(e.target.value as AppFormCategory)}
               className="w-full h-11 px-3 bg-neutral-950 border border-neutral-700 rounded-xl text-white text-sm outline-none focus:border-tesla-red"
             >
               <option value="streaming">Medya & Video Akışı</option>

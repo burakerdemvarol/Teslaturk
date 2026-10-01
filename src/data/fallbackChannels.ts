@@ -202,7 +202,7 @@ export const FALLBACK_CHANNELS: Channel[] = [
     turksatFreq: '12245 H 27500 (Türksat 4A)',
     country: 'TR',
     preferredEngine: 'youtube',
-    description: 'Dünyada ve Türkiye'de İlk Bilen Siz Olun',
+    description: "Dünyada ve Türkiye'de İlk Bilen Siz Olun",
   },
   {
     id: 'ahaber',
@@ -293,7 +293,7 @@ export const FALLBACK_CHANNELS: Channel[] = [
     turksatFreq: '12209 H 10000 (Türksat 4A)',
     country: 'TR',
     preferredEngine: 'youtube',
-    description: 'Türkiye'nin Finans ve Ekonomi Ekranı',
+    description: "Türkiye'nin Finans ve Ekonomi Ekranı",
   },
   {
     id: 'ekoturk',

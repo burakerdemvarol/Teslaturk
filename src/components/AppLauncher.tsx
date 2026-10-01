@@ -34,6 +34,14 @@ export const AppLauncher: React.FC<AppLauncherProps> = ({ initialCategory = 'all
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [embeddedApp, setEmbeddedApp] = useState<AppItem | null>(null);
+  const getSafeImageSrc = (url: string) => {
+    try {
+      const parsedUrl = new URL(url, window.location.origin);
+      return parsedUrl.protocol === 'https:' || parsedUrl.protocol === 'http:' ? parsedUrl.toString() : '';
+    } catch {
+      return '';
+    }
+  };
 
   useEffect(() => {
     if (initialCategory) {
@@ -161,6 +169,7 @@ export const AppLauncher: React.FC<AppLauncherProps> = ({ initialCategory = 'all
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4 flex-1">
         {filteredApps.map(app => {
+          const safeIconSrc = getSafeImageSrc(app.icon);
           return (
             <div
               key={app.id}
@@ -170,7 +179,7 @@ export const AppLauncher: React.FC<AppLauncherProps> = ({ initialCategory = 'all
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-neutral-950 p-2 flex items-center justify-center border border-neutral-800/80 group-hover:scale-105 transition-transform">
                   <img
-                    src={app.icon}
+                    src={safeIconSrc}
                     alt={app.name}
                     className="w-full h-full object-contain"
                     onError={(e) => {
@@ -213,7 +222,7 @@ export const AppLauncher: React.FC<AppLauncherProps> = ({ initialCategory = 'all
         <div className="fixed inset-0 z-50 flex flex-col bg-black">
           <div className="h-14 px-4 bg-neutral-900 border-b border-neutral-800 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img src={embeddedApp.icon} alt="" className="w-6 h-6 object-contain" />
+              <img src={getSafeImageSrc(embeddedApp.icon)} alt="" className="w-6 h-6 object-contain" />
               <span className="font-bold text-sm text-white">{embeddedApp.name}</span>
               <span className="text-xs text-neutral-400 hidden sm:inline">Gömülü Dokunmatik Mod</span>
             </div>
